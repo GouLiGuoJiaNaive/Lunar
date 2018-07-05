@@ -1,0 +1,14 @@
+name: Lunar
+main: cn.mxcymc.www.Lunar
+version: 1.2
+description: a spigot plugin
+author: Paukist
+softdepend: [PlaceholderAPI]
+commands:
+  lunar:
+    description: get Realsurvival's help
+    usage: /<command>
+permissions: 
+  lunar.Admin:
+    description: Use Admin Commands
+    default: op
