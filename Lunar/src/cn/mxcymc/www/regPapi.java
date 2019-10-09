@@ -5,47 +5,58 @@
  */
 package cn.mxcymc.www;
 
-import static cn.mxcymc.www.Lunar.getTodayFestival;
-import static cn.mxcymc.www.LunarDate.Today;
-import static cn.mxcymc.www.LunarDate.getLunar;
-import static cn.mxcymc.www.LunarDate.getLunarPlus;
-import static cn.mxcymc.www.LunarDate.getTodayLunar;
-import static cn.mxcymc.www.LunarDate.getTodayLunarPlus;
-import static cn.mxcymc.www.LunarDate.getTodaySolarTerms;
-import static cn.mxcymc.www.LunarDate.getTodayYear;
-import java.util.Calendar;
+import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
-import me.clip.placeholderapi.external.EZPlaceholderHook;
-import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  *
  * @author Administrator
  */
-public class regPapi extends EZPlaceholderHook {
-    public regPapi (Lunar s) {
-            super(s, "lunar");
+public class regPapi extends PlaceholderExpansion {
+
+    public Lunar plugin;
+
+    public regPapi(Lunar s) {
+        plugin = s;
     }
-     
+
     @Override
-    public String onPlaceholderRequest(Player player,String string) {
-            if (player == null) {
-                return "";
-            }
-            if (string.equalsIgnoreCase("today")) {
-                return Today();
-            }
-            if (string.equalsIgnoreCase("year")) {
-                return getTodayYear();
-            }
-            if (string.equalsIgnoreCase("month")) {
-                return getTodayLunar();
-            }
-            if (string.equalsIgnoreCase("solar_terms")) {
-                return getTodaySolarTerms();
-            }
-            if (string.equalsIgnoreCase("festival")) 
-                return getTodayFestival();
-            return null;
-            } 
+    public String onPlaceholderRequest(Player player, String string) {
+        if (string.equalsIgnoreCase("today")) {
+            return LunarDate.Today();
+        }
+        if (string.equalsIgnoreCase("year")) {
+            return LunarDate.getTodayYear();
+        }
+        if (string.equalsIgnoreCase("month")) {
+            return LunarDate.getTodayLunar();
+        }
+        if (string.equalsIgnoreCase("solar_terms")) {
+            return LunarDate.getTodaySolarTerms();
+        }
+        if (string.equalsIgnoreCase("festival")) {
+            return Lunar.getTodayFestival();
+        }
+        return null;
+    }
+
+    @Override
+    public String getIdentifier() {
+        return "lunar";
+    }
+
+    @Override
+    public String getAuthor() {
+        return plugin.getDescription().getAuthors().toString();
+    }
+
+    @Override
+    public String getVersion() {
+        return plugin.getDescription().getVersion();
+    }
+
+    @Override
+    public boolean persist() {
+        return true;
+    }
 }
